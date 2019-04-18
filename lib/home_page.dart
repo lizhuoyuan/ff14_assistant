@@ -1,7 +1,7 @@
 /*
  * author: Created by 李卓原 on 2019/3/20.
  * email: zhuoyuan93@gmail.com
- *
+ * 首页 app一进来的页面 有跳转到career page的入口
  */
 
 import 'package:ff14_assistant/career_page.dart';

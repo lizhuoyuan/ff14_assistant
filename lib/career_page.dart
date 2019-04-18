@@ -9,7 +9,6 @@ import 'package:ff14_assistant/skills_page.dart';
 import 'package:flutter/material.dart';
 
 class CareerPage extends StatefulWidget {
-
   @override
   _CareerPageState createState() => _CareerPageState();
 }
