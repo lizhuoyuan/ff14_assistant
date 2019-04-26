@@ -4,9 +4,9 @@
  *
  */
 
-import 'package:ff14_assistant/career_page.dart';
-import 'package:ff14_assistant/home_page.dart';
-import 'package:ff14_assistant/skills_page.dart';
+import 'package:ff14_assistant/page/career_page.dart';
+import 'package:ff14_assistant/page/home_page.dart';
+import 'package:ff14_assistant/page/skills_page.dart';
 import 'package:flutter/material.dart';
 
 class AppRoutes {
