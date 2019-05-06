@@ -23,6 +23,7 @@ class SkillsBLoC {
     var skillsResponse = SkillsResponse.fromJson(response);
     if (skillsResponse.code == 0) {
       skills = skillsResponse.data;
+      skills.sort((a, b) => a.slv.compareTo(b.slv));
       _subject.add(skills);
     }
   }
