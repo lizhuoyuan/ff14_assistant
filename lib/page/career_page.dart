@@ -19,7 +19,7 @@ class _CareerPageState extends State<CareerPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('职业指南'),
+        title: Text('职业技能'),
         centerTitle: true,
       ),
       body: Container(
