@@ -13,3 +13,9 @@ const careers = [
   {'id': 3, 'name': '武士', 'e_name': 'samurai'},
   {'id': 4, 'name': '龙骑士', 'e_name': 'dragoon'},
 ];
+
+const adAppId = 'ca-app-pub-2770345077398727~2236417074';
+
+const adInterstitialId = 'ca-app-pub-2770345077398727/4578852845';
+const adVideoId = 'ca-app-pub-2770345077398727/1278558627';
+const adBannerId = 'ca-app-pub-2770345077398727/1599613519';

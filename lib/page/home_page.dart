@@ -4,43 +4,78 @@
  * 首页 app一进来的页面 有跳转到career page的入口
  */
 
+import 'dart:async';
+
 import 'package:ff14_assistant/common/constant.dart';
-import 'package:ff14_assistant/page/career_page.dart';
+import 'package:ff14_assistant/utils/utils.dart';
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  InterstitialAd _interstitialAd;
+  Timer _timer;
+  int delayTime = 5;
+
+  InterstitialAd createInterstitialAd() {
+    return InterstitialAd(
+      adUnitId: adInterstitialId,
+      targetingInfo: Utils.targetingInfo,
+      listener: (MobileAdEvent event) {
+        print("InterstitialAd event $event");
+      },
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadInterstitialAd();
+    _timer = Timer.periodic(Duration(seconds: 1), (_timer) {
+      if (delayTime == 0) {
+        cancelTimerAndAd();
+        return;
+      }
+      setState(() {
+        delayTime--;
+      });
+      print(delayTime);
+    });
+  }
+
+  void cancelTimerAndAd() {
+    _timer?.cancel();
+    _timer = null;
+    _interstitialAd?.dispose();
+    Navigator.pushNamed(context, 'career');
+  }
+
+  loadInterstitialAd() {
+    _interstitialAd?.dispose();
+    _interstitialAd = createInterstitialAd()
+      ..load()
+      ..show();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('职业指南'),
-        centerTitle: true,
+        title: const Text('AdMob Plugin example app'),
       ),
-      body: Container(
-        child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 10.0, //主轴(竖直)方向间距
-              crossAxisSpacing: 10.0, //纵轴(水平)方向间距
-              childAspectRatio: 1.0), //纵轴缩放比例
-          itemBuilder: _gridBuilder,
-          itemCount: careers.length,
-        ),
-      ),
+      body: Container(color: Colors.blue),
     );
   }
 
-  Widget _gridBuilder(BuildContext context, int index) {
-    return InkWell(
-      onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (BuildContext context) {
-          return CareerPage();
-        }));
-      },
-      child: Center(
-        child: Text(careers[index]['name']),
-      ),
-    );
+  @override
+  void dispose() {
+    _interstitialAd?.dispose();
+    _timer?.cancel();
+    _timer = null;
+    super.dispose();
   }
 }
