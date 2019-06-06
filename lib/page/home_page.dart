@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
       adUnitId: adInterstitialId,
       targetingInfo: Utils.targetingInfo,
       listener: (MobileAdEvent event) {
-        print("InterstitialAd event $event");
+        print("--------------InterstitialAd event $event");
       },
     );
   }
@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
     _timer?.cancel();
     _timer = null;
     _interstitialAd?.dispose();
-    Navigator.pushNamed(context, 'career');
+    Navigator.pushReplacementNamed(context, 'career');
   }
 
   loadInterstitialAd() {
@@ -64,18 +64,15 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('AdMob Plugin example app'),
-      ),
       body: Container(color: Colors.blue),
     );
   }
 
   @override
   void dispose() {
+    super.dispose();
     _interstitialAd?.dispose();
     _timer?.cancel();
     _timer = null;
-    super.dispose();
   }
 }
